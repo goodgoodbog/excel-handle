@@ -14,6 +14,7 @@ from funtion import extract_2
 from funtion import statistics_3
 from funtion import extract_merge
 from funtion import supplement_plus
+from funtion import extract_merge_plus
 
 
 # 多线程启动组件显示
@@ -31,6 +32,7 @@ def began(root):
     fun_11 = statistics_3.Statistics_3(root)
     fun_12 = extract_merge.Extract_Merge(root)
     fun_13 = supplement_plus.Supplement_plus(root)
+    fun_14 = extract_merge_plus.Extract_Merge_plus(root)
 
     t1 = tk.Label(root,
                   text='文件操作区域：注意文件必须为xlsx文件，且不能设置为“只读"，文件名为红色时代表该文件无法正常打开，请检查该文件')
@@ -79,6 +81,9 @@ def began(root):
     Rad13 = tk.Radiobutton(root, text='功能3plus：回填运单号订单列表处理', value=13, indicatoron=False, selectcolor='darkgrey',
                            command=fun_13.show)
     Rad13.grid(row=207, column=0, sticky='w')
+    Rad14 = tk.Radiobutton(root, text='功能1+4plus：提取并对照信息', value=14, indicatoron=False, selectcolor='darkgrey',
+                           command=fun_12.show)
+    Rad14.grid(row=207, column=1, sticky='w')
 
 if __name__ == '__main__':
     root = tk.Tk()
