@@ -1,9 +1,9 @@
 # -*- coding=utf-8-*-
-# 功能1+4：提取并对照信息
-# @Time : 2024/9/14 15:33
+# @Time : 2024/9/20 9:56
 # @Author : BQ
-# @File : extract_merge.py
+# @File : extract_merge_plus.py
 # @Software: PyCharm
+# 功能1+4plus：提取并合并信息
 import os
 import time
 import tkinter as tk
@@ -16,10 +16,10 @@ from common.all_use import choose_flie
 from common.all_use import creat_thread
 from common import all_use
 
-class Extract_Merge:
+class Extract_Merge_plus:
     def __init__(self, root):
         use = all_use.Use(root)
-        self.f1 = tk.Label(root, text='功能1+4：提取并合并信息：')
+        self.f1 = tk.Label(root, text='功能1+4plus：提取并合并信息：')
         self.f_duizhao_label = tk.Label(root, text='产品中英文对照表:')
         self.f_dingdan1_label = tk.Label(root, text='订单列表1:')
         self.f_dingdan2_label = tk.Label(root, text='订单列表2:')
@@ -39,35 +39,35 @@ class Extract_Merge:
         self.Extract_compare_Choose_more_file = ttk.Button(root, text='选择多个订单列表',
                                                            command=self.Extract_compare_Choose_files)
         self.f_duizhao_entry = tk.Entry(root, width=56, highlightthickness=1.5, highlightcolor='blue',
-                                        name='extract_merge_duizhao_entry', validate="key", relief='sunken',
+                                        name='extract_merge_plus_duizhao_entry', validate="key", relief='sunken',
                                         validatecommand=(use.check_open_file1, '%P', '%W'))
         self.f_dingdan1_entry = tk.Entry(root, width=56, highlightthickness=1.5, highlightcolor='blue',
-                                         name='extract_merge_dingdan1_entry', validate="key", relief='sunken',
+                                         name='extract_merge_plus_dingdan1_entry', validate="key", relief='sunken',
                                          validatecommand=(use.check_open_file1, '%P', '%W'))
         self.f_jg_entry = tk.Entry(root, width=56)
         self.f_dingdan2_entry = tk.Entry(root, width=56, highlightthickness=1.5, highlightcolor='blue',
-                                         name='extract_merge_dingdan2_entry', validate="key", relief='sunken',
+                                         name='extract_merge_plus_dingdan2_entry', validate="key", relief='sunken',
                                          validatecommand=(use.check_open_file1, '%P', '%W'))
         self.f_dingdan3_entry = tk.Entry(root, width=56, highlightthickness=1.5, highlightcolor='blue',
-                                         name='extract_merge_dingdan3_entry', validate="key", relief='sunken',
+                                         name='extract_merge_plus_dingdan3_entry', validate="key", relief='sunken',
                                          validatecommand=(use.check_open_file1, '%P', '%W'))
         self.f_dingdan4_entry = tk.Entry(root, width=56, highlightthickness=1.5, highlightcolor='blue',
-                                         name='extract_merge_dingdan4_entry', validate="key", relief='sunken',
+                                         name='extract_merge_plus_dingdan4_entry', validate="key", relief='sunken',
                                          validatecommand=(use.check_open_file1, '%P', '%W'))
         self.f_dingdan5_entry = tk.Entry(root, width=56, highlightthickness=1.5, highlightcolor='blue',
-                                         name='extract_merge_dingdan5_entry', validate="key", relief='sunken',
+                                         name='extract_merge_plus_dingdan5_entry', validate="key", relief='sunken',
                                          validatecommand=(use.check_open_file1, '%P', '%W'))
         self.f_dingdan6_entry = tk.Entry(root, width=56, highlightthickness=1.5, highlightcolor='blue',
-                                         name='extract_merge_dingdan6_entry', validate="key", relief='sunken',
+                                         name='extract_merge_plus_dingdan6_entry', validate="key", relief='sunken',
                                          validatecommand=(use.check_open_file1, '%P', '%W'))
         self.f_dingdan7_entry = tk.Entry(root, width=56, highlightthickness=1.5, highlightcolor='blue',
-                                         name='extract_merge_dingdan7_entry', validate="key", relief='sunken',
+                                         name='extract_merge_plus_dingdan7_entry', validate="key", relief='sunken',
                                          validatecommand=(use.check_open_file1, '%P', '%W'))
         self.f_dingdan8_entry = tk.Entry(root, width=56, highlightthickness=1.5, highlightcolor='blue',
-                                         name='extract_merge_dingdan8_entry', validate="key", relief='sunken',
+                                         name='extract_merge_plus_dingdan8_entry', validate="key", relief='sunken',
                                          validatecommand=(use.check_open_file1, '%P', '%W'))
         self.f_dingdan9_entry = tk.Entry(root, width=56, highlightthickness=1.5, highlightcolor='blue',
-                                         name='extract_merge_dingdan9_entry', validate="key", relief='sunken',
+                                         name='extract_merge_plus_dingdan9_entry', validate="key", relief='sunken',
                                          validatecommand=(use.check_open_file1, '%P', '%W'))
         self.e10 = tk.Entry(root, width=56)
         self.f_choose_duizhao = ttk.Button(root, text='选择文件', command=lambda: choose_flie(self.f_duizhao_entry))
@@ -351,23 +351,22 @@ class Extract_Merge:
         df1 = df1.cast({"街道": pl.String, '寓所': pl.String})
         df1 = df1.with_columns(
             pl.col('订单编号').alias('客户单号'),
-            pl.lit('燕文专线追踪-普货').alias('产品名称'),
+            pl.lit('联邮通经济挂号-普货').alias('运输方式'),
             (pl.col('名') + ' ' + pl.col('姓')).alias('收件人姓名'),
             pl.when(pl.col('联系电话') != '').then(pl.col('联系电话').str.replace_all(r'[+ ]', '')).otherwise(
                 pl.lit('000000000')).alias('收件人电话'),
             (pl.col('街道') + ' ' + pl.col('寓所')).alias('收件人地址'),
             pl.col('城市').str.replace_all(r'[^\w\s]', '').alias('收件人城市'),
             pl.col('联系邮箱').alias('收件人邮箱'),
-            # pl.col('订单编号').alias('订单号'),
-            pl.col('国家/地区').alias('收件人国家'),
+            pl.col('国家/地区').alias('目的国家'),
             pl.col('省/州').alias('收件人省/州'),
             pl.col('邮编').alias('收件人邮编'),
-            pl.lit('美元').alias('币种类型'),
-            pl.lit('否').alias('是否含电'),
-            pl.lit('骰子').alias('中文品名1'),
-            pl.lit('dice').alias('英文品名1'),
-            pl.lit(1).alias('单票数量1'),
-            pl.lit(10).alias('重量1(g)'),
+            pl.lit('USD').alias('运费/申报保险费/商品申报币种'),
+            pl.lit('否').alias('是否带电池'),
+            pl.lit('骰子').alias('海关申报品名（中）1'),
+            pl.lit('dice').alias('海关报关品名1'),
+            pl.lit(1).alias('申报品数量1'),
+            pl.lit(0.1).alias('重量'),
             pl.when(pl.col('国家/地区').is_in(['美国', '澳大利亚', 'United States', 'Australia'])).then(30).when(
                 pl.col('国家/地区').is_in(['加拿大', 'Canada'])).then(13).otherwise(5).alias('申报价值1'),
             pl.lit(np.nan).alias('平台交易号')
@@ -376,7 +375,6 @@ class Extract_Merge:
         for column1 in need_column:
             df1 = df1.with_columns(pl.lit(None).alias(column1))
         df_end1 = df1.select(last_column2)
-        print(last_column2)
         df_end1 = df_end1.sort(by='客户单号')
 
         # 统计各个订单编号的商品
@@ -465,3 +463,4 @@ class Extract_Merge:
         self.f_jg_entry.insert(tk.INSERT, '已完成，已保存到：' + full_path1 + '和' + full_path2)
         self.f_jg_entry.configure(fg='green')
         return
+
