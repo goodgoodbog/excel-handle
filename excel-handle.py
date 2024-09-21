@@ -1,5 +1,4 @@
 # -*- coding=utf-8-*-
-import threading
 import tkinter as tk
 from funtion import combined
 from funtion import extract
@@ -17,8 +16,11 @@ from funtion import supplement_plus
 from funtion import extract_merge_plus
 
 
-# 多线程启动组件显示
-def began(root):
+if __name__ == '__main__':
+    print('ppp')
+    root = tk.Tk()
+    root.title('Excel表格定制处理')
+    root.geometry('900x600')
     fun_1 = extract.add_file(root)
     fun_2 = match.match(root)
     fun_3 = supplement.Supplement(root)
@@ -78,18 +80,11 @@ def began(root):
     Rad12 = tk.Radiobutton(root, text='功能1+4：提取并对照信息', value=12, indicatoron=False, selectcolor='darkgrey',
                            command=fun_12.show)
     Rad12.grid(row=206, column=1, sticky='w')
-    Rad13 = tk.Radiobutton(root, text='功能3plus：回填运单号订单列表处理', value=13, indicatoron=False, selectcolor='darkgrey',
+    Rad13 = tk.Radiobutton(root, text='功能3plus：回填运单号订单列表处理', value=13, indicatoron=False,
+                           selectcolor='darkgrey',
                            command=fun_13.show)
     Rad13.grid(row=207, column=0, sticky='w')
     Rad14 = tk.Radiobutton(root, text='功能1+4plus：提取并对照信息', value=14, indicatoron=False, selectcolor='darkgrey',
                            command=fun_12.show)
     Rad14.grid(row=207, column=1, sticky='w')
-
-if __name__ == '__main__':
-    root = tk.Tk()
-    root.title('Excel表格定制处理')
-    root.geometry('900x600')
-    new_thread2 = threading.Thread(target=lambda: began(root), name='l1')
-    new_thread2.daemon = 1
-    new_thread2.start()
     tk.mainloop()
