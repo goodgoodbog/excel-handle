@@ -36,6 +36,7 @@ class Use:
                     Component.configure(fg='red')
                 return 1
 
+
 def div_forget(component):
     print('1')
     # print(component)
@@ -43,6 +44,7 @@ def div_forget(component):
         print(component.get())
         component.delete("0", 'end')
     component.forget()
+
 
 # 选择文件
 def choose_flie(entry):
@@ -95,11 +97,11 @@ def read_excel_to_dataframe(entry_list: list, entry_name_list: list, title_began
                 wb = python_calamine.CalamineWorkbook.from_path(entry.get())
                 rows = list(wb.get_sheet_by_index(0).to_python())
                 # 解决python_calamine读取大额数时转为科学计数法的问题，暂用
-                for index1, data1 in enumerate(rows):
-                    try:
-                        rows[index1][0] = int(rows[index1][0])
-                    except:
-                        pass
+                # for index1, data1 in enumerate(rows):
+                #     try:
+                #         rows[index1][0] = int(rows[index1][0])
+                #     except:
+                #         pass
                 ##
                 if title_began > 0:
                     for index1, data in enumerate(rows[title_began - 1]):
@@ -129,7 +131,7 @@ def read_excel_to_dataframe(entry_list: list, entry_name_list: list, title_began
                     jg_entry.insert(tk.INSERT, entry_name_list[index] + '中不存在' + data + '，请重新选择！！！')
                     return (None, None) if save_first_rows else None
             df_list.append(df)
-        elif index==0:
+        elif index == 0:
             jg_entry.configure(fg='red')
             jg_entry.delete("0", 'end')
             jg_entry.insert(tk.INSERT, entry_name_list[index] + '为空，请重新选择！！！')

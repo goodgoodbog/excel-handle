@@ -85,6 +85,6 @@ if __name__ == '__main__':
                            command=fun_13.show)
     Rad13.grid(row=207, column=0, sticky='w')
     Rad14 = tk.Radiobutton(root, text='功能1+4plus：提取并对照信息', value=14, indicatoron=False, selectcolor='darkgrey',
-                           command=fun_12.show)
+                           command=fun_14.show)
     Rad14.grid(row=207, column=1, sticky='w')
     tk.mainloop()
