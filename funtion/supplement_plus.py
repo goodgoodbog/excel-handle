@@ -128,7 +128,7 @@ class Supplement_plus:
         count = 0
         for i in range(1, row3 + 1):
             if sheet3.cell(i, 1).value is not None:
-                alllist_4.append(sheet3.cell(i, 1).value)
+                alllist_4.append(sheet3.cell(i, 1).value.lower())
         try:
             alllist_4 = list(set(alllist_4))
         except:
@@ -214,17 +214,18 @@ class Supplement_plus:
             return
 
         for i in range(3, row2 + 1):
-            s = sheet2.cell(i, Order_Numbe2).value
+            s = sheet2.cell(i, Order_Numbe2).value.lower()
+            print(s)
             if s[0] in list2:
                 pass
             else:
                 list2.append(s[0])
             for j in range(2, row1 + 1):
-                if s == sheet1.cell(j, Order_Numbe1).value:
+                if s == sheet1.cell(j, Order_Numbe1).value.lower():
                     for k in range(1, row3 + 1):
-                        if s == sheet3.cell(k, 1).value:
+                        if s == sheet3.cell(k, 1).value.lower():
                             sheet2.cell(i, wu_liu_dan_hao2).value = sheet1.cell(j, yun_dan_hao1).value
-                            sheet2.cell(i, wu_liu_shang2).value = 'yanwen'
+                            sheet2.cell(i, wu_liu_shang2).value = 'FOUR PX EXPRESS'
                             sheet2.cell(i, fa_huo_shu_liang2).value = sheet2.cell(i, sheng_yu_shu_liang2).value
                             try:
                                 alllist_4.remove(s)
