@@ -96,7 +96,7 @@ class Supplement_plus:
     @creat_thread
     def work(self):
         list2 = []
-        global alllist_4
+        alllist_4=[]
         try:
             wb1 = openpyxl.load_workbook(self.e1.get())
         except:
@@ -119,7 +119,7 @@ class Supplement_plus:
             self.e10.configure(fg='red')
             return
         sheet1 = wb1.active
-        sheet1.delete_cols(idx=1, amount=1)  ##删除第一列
+        # sheet1.delete_cols(idx=1, amount=1)  ##删除第一列
         sheet2 = wb2.active
         sheet3 = wb3.active
         row1 = sheet1.max_row
@@ -168,6 +168,7 @@ class Supplement_plus:
                 Order_Numbe1 = i
                 break
         # 寻找运单号
+        print(Order_Numbe1)
         yun_dan_hao1 = -1
         for i in range(1, column1 + 1):
             # if sheet1.cell(1, i).value == '运单号':
